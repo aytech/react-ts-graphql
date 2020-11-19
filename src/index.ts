@@ -1,29 +1,16 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import { listings } from './listings'
+import express, { Application } from 'express'
+import { ApolloServer } from 'apollo-server-express'
+import { connectDatabase } from './database'
+import { typeDefs, resolvers } from './graphql'
 
-const app = express()
-const port = 9000
+const mount = async (app: Application) => {
+    const db = await connectDatabase()
+    const server = new ApolloServer({ typeDefs, resolvers, context: () => ({ db }) })
+    server.applyMiddleware({ app, path: '/api' })
 
-app.use(bodyParser.json())
+    app.listen(process.env.APP_PORT)
 
-app.get("/", (_req, res) => res.send(`Hello world!`))
-app.get("/listings", (_req, res) => res.send(listings))
-app.post("/listings", (_req, res) => res.send(listings))
-app.delete("/listings", (req, res) => {
-    const id: string = req.body.id
+    console.log(`[app]: http://localhost:${process.env.APP_PORT}`);
+}
 
-    for (let i = 0; i < listings.length; i++) {
-        if (listings[i].id === id) {
-            res.statusCode = 200
-            return res.send(listings.splice(i, 1))
-        }
-    }
-
-    res.statusCode = 404
-    res.send('Failed to delete listing')
-})
-
-app.listen(port)
-
-console.log(`[app]: http://localhost:${port}`);
+mount(express())
