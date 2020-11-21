@@ -4,7 +4,11 @@ import { ObjectId } from 'mongodb'
 
 export const listingsResolvers: IResolvers = {
   Query: {
-    listings: async (_root: undefined, _args: unknown, { db }: { db: Database }): Promise<Listing[]> => {
+    listings: async (
+      _root: undefined,
+      _args: unknown,
+      { db }: { db: Database }
+    ): Promise<Listing[]> => {
       return await db.listings.find({}).toArray()
     }
   },
@@ -14,7 +18,7 @@ export const listingsResolvers: IResolvers = {
         _id: new ObjectId(id)
       })
       if (!result.value) {
-        throw new Error(`failed to delete record with ID ${id}`)
+        throw new Error(`failed to delete record with ID ${ id }`)
       }
       return result.value
     }
