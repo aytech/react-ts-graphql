@@ -7,7 +7,6 @@ import {
 } from '../lib/types'
 
 const url = `mongodb+srv://${ process.env.DB_USER }:${ process.env.DB_PASSWORD }@${ process.env.DB_CLUSTER }.mongodb.net`
-console.log('URL: ', url);
 
 export const connectDatabase = async (): Promise<Database> => {
     const client = await MongoClient.connect(url, {
