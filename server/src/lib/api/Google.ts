@@ -24,7 +24,7 @@ export const Google = {
       auth: oauth2Client
     }).people.get({
       resourceName: 'people/me',
-      personFields: 'emailAddress,names,photos'
+      personFields: 'emailAddresses,names,photos'
     })
 
     return { user: data }
