@@ -24,7 +24,7 @@ import { LogIn as LogInData, LogInVariables } from './lib/graphql/mutations/LogI
 import { LOG_IN } from './lib/graphql/mutations/LogIn'
 import { AppHeaderSkeleton, ErrorBanner } from './lib/components'
 
-const client = new ApolloClient({ 
+const client = new ApolloClient({
   uri: "/api",
   request: async operation => {
     const token = sessionStorage.getItem("token")
@@ -93,7 +93,7 @@ const App = () => {
           <Route exact path="/listing/:id" component={ Listing } />
           <Route exact path="/listings/:location?" component={ Listings } />
           <Route exact path="/login" render={ props => <Login { ...props } setViewer={ setViewer } /> } />
-          <Route exact path="/user/:id" component={ User } />
+          <Route exact path="/user/:id" render={ props => <User { ...props } viewer={ viewer } /> } />
           <Route component={ NotFound } />
         </Switch>
       </Layout>
