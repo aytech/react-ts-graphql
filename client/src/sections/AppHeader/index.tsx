@@ -13,7 +13,7 @@ interface Props {
 export const AppHeader = ({ viewer, setViewer }: Props) => {
   return (
     <Header className="app-header">
-      <div className="app-header__logo-search-selection">
+      <div className="app-header__logo-search-section">
         <div className="app-header__logo">
           <Link to="/">
             <img src={ logo } alt="TinyHouse logo" />
