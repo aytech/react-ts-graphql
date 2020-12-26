@@ -19,5 +19,5 @@ export const displaySuccessNotification = (message: string, description?: string
 }
 
 export const displayErrorMessage = (error: string) => {
-  return message.error
+  return message.error(error)
 }
