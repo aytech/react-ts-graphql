@@ -5,7 +5,7 @@ import { Content } from "antd/lib/layout/layout"
 import { USER } from "../../lib/graphql/queries"
 import { User as UserData, UserVariables } from "../../lib/graphql/queries/User/__generated__/User"
 import { Col, Row } from "antd"
-import { UserProfile } from "./components"
+import { UserBookings, UserListings, UserProfile } from "./components"
 import { Viewer } from "../../lib/types"
 import { ErrorBanner, PageSkeleton } from "../../lib/components"
 
