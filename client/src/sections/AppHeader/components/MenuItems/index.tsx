@@ -7,6 +7,7 @@ import { useMutation } from "react-apollo"
 import { LogOut as LogOutData } from "../../../../lib/graphql/mutations/LogOut/__generated__/LogOut"
 import { LOG_OUT } from "../../../../lib/graphql/mutations/LogOut"
 import { displayErrorMessage, displaySuccessNotification } from "../../../../lib/utils"
+import { ApolloError } from "apollo-client"
 
 interface Props {
   viewer: Viewer
@@ -25,7 +26,10 @@ export const MenuItems = ({ viewer, setViewer }: Props) => {
         displaySuccessNotification("You've successfully logged out!")
       }
     },
-    onError: displayErrorMessage("Sorry, we weren't able to log you out, please try again later.")
+    onError: (error: ApolloError) => {
+      console.log(`Error logging out: ${ error }`)
+      displayErrorMessage("Sorry, we weren't able to log you out, please try again later.")
+    }
   })
   const handleLogOut = () => {
     logOut()
@@ -46,12 +50,12 @@ export const MenuItems = ({ viewer, setViewer }: Props) => {
       </Item>
     </SubMenu >
   ) : (
-      <Item>
-        <Link to="/login">
-          <Button type="primary">Sign In</Button>
-        </Link>
-      </Item>
-    )
+    <Item>
+      <Link to="/login">
+        <Button type="primary">Sign In</Button>
+      </Link>
+    </Item>
+  )
 
   return (
     <Menu mode="horizontal" selectable={ false } className="menu">
