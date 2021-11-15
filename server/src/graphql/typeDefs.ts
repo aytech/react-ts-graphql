@@ -69,6 +69,10 @@ export const typeDefs = gql`
   input LogInInput {
     code: String!
   }
+
+  input ConnectStripeInput {
+    code: String!
+  }
   
   type Query {
     authUrl: String!
@@ -83,6 +87,8 @@ export const typeDefs = gql`
   }
 
   type Mutation {
+    connectStripe(input: ConnectStripeInput!): Viewer!
+    disconnectStripe: Viewer!
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
   }
